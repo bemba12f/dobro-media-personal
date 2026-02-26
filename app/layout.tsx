@@ -1,11 +1,19 @@
 import "./globals.css";
+import type { ReactNode } from "react";
 
-export default function RootLayout({ children }) {
+interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pl">
       <head>
         <title>Wojtek PF Szymanski</title>
-        <meta name="description" content="Produkcja filmowa i motion design — Dobro Media" />
+        <meta
+          name="description"
+          content="Produkcja filmowa i motion design — Dobro Media"
+        />
         <link rel="icon" href="/dobro-media.ico" sizes="any" />
       </head>
       <body>{children}</body>

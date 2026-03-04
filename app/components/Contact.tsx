@@ -1,11 +1,12 @@
 // app/components/Contact.tsx
 export default function Contact() {
   return (
-    <section id="contact" className="py-40 bg-white">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 text-black">
+    <section id="contact" className="py-32 md:py-40 bg-white">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 text-black">
 
         {/* LEFT COLUMN — INTRO + CTA */}
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-8 md:gap-10 text-center md:text-left items-center md:items-start">
+
           {/* Title */}
           <p className="text-3xl sm:text-4xl md:text-4xl font-semibold leading-[1.15]">
             Get in touch
@@ -34,10 +35,12 @@ export default function Contact() {
           >
             Mail me
           </a>
+
         </div>
 
         {/* RIGHT COLUMN — LINKS + DETAILS */}
-        <div className="self-start pt-[3.2rem] text-right">
+        <div className="self-start md:pt-[3.2rem] text-center md:text-right">
+
           <div className="flex flex-col gap-4 text-lg sm:text-xl leading-[1.35] tracking-wide">
 
             {/* LinkedIn */}
@@ -45,10 +48,9 @@ export default function Contact() {
               href="https://www.linkedin.com/in/wojtek-szyma%C5%84ski-9ba0521ab/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-end gap-3 hover:opacity-60 transition-opacity"
+              className="inline-flex items-center justify-center md:justify-end gap-3 hover:opacity-60 transition-opacity"
             >
               <span>View my LinkedIn</span>
-              {/* Profile Icon */}
               <svg
                 width="18"
                 height="18"
@@ -56,7 +58,6 @@ export default function Contact() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                aria-hidden
               >
                 <circle cx="12" cy="8" r="4" />
                 <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
@@ -68,10 +69,9 @@ export default function Contact() {
               href="https://drive.google.com/file/d/1QnCGHZRUGGuLhlNfvgNfqWf5P0JrEON-/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-end gap-3 hover:opacity-60 transition-opacity"
+              className="inline-flex items-center justify-center md:justify-end gap-3 hover:opacity-60 transition-opacity"
             >
               <span>View my resume (PDF)</span>
-              {/* File Icon */}
               <svg
                 width="18"
                 height="18"
@@ -79,7 +79,6 @@ export default function Contact() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.5"
-                aria-hidden
               >
                 <path d="M6 2h8l4 4v16H6z" />
                 <path d="M14 2v4h4" />
@@ -87,11 +86,12 @@ export default function Contact() {
             </a>
 
             {/* Contact details */}
-            <div className="mt-6 flex flex-col gap-1">
+            <div className="mt-6 flex flex-col gap-1 text-center md:text-right">
               <p>wpf.szymanski@gmail.com</p>
               <p>+48 693 224 540</p>
               <p>Gdańsk, Poland · Remote</p>
             </div>
+
           </div>
         </div>
 

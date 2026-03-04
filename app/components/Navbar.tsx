@@ -2,17 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(true);
   const [lastY, setLastY] = useState(0);
   const [showTopBtn, setShowTopBtn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // 🔹 LOGO – delay startu GIF-a
   const [showLogo, setShowLogo] = useState(false);
 
-  // Hide navbar on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
@@ -32,7 +31,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastY]);
 
-  // ⏱️ OPÓŹNIENIE STARTU LOGO (2 sekundy)
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLogo(true);
@@ -58,13 +56,13 @@ export default function Navbar() {
               <img
                 src="/logo150px2.gif"
                 alt="Wojtek PF Szymanski"
-                className="h-[52px] w-auto" // ⬅️ ~30% większe
+                className="h-[52px] w-auto"
               />
             )}
           </Link>
 
-          {/* MENU */}
-          <ul className="flex items-center gap-[9.5rem]">
+          {/* DESKTOP MENU */}
+          <ul className="hidden md:flex items-center gap-[9.5rem]">
             {[
               { name: "about", href: "#about" },
               { name: "portfolio", href: "#portfolio" },
@@ -84,10 +82,48 @@ export default function Navbar() {
               </motion.li>
             ))}
           </ul>
+
+          {/* MOBILE HAMBURGER */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden flex flex-col gap-1"
+          >
+            <span className="w-6 h-[2px] bg-black"></span>
+            <span className="w-6 h-[2px] bg-black"></span>
+            <span className="w-6 h-[2px] bg-black"></span>
+          </button>
         </div>
       </motion.nav>
 
-      {/* POWRÓT DO GÓRY */}
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.35 }}
+            className="fixed top-20 left-0 w-full bg-white z-40 flex flex-col items-center gap-8 py-10 md:hidden"
+          >
+            {[
+              { name: "about", href: "#about" },
+              { name: "portfolio", href: "#portfolio" },
+              { name: "contact", href: "#contact" },
+            ].map((item, i) => (
+              <Link
+                key={i}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-black text-lg tracking-[0.3em]"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* BACK TO TOP */}
       <motion.button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         initial={{ opacity: 0 }}

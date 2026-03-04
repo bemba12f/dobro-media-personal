@@ -26,7 +26,7 @@ export default function PlayBubble() {
       if (e.key === "Escape") setOpen(false);
     };
 
-    document.body.style.overflow = "hidden"; // prevent scroll
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKey);
 
     return () => {
@@ -42,23 +42,29 @@ export default function PlayBubble() {
           <motion.div
             key="bubble"
             onClick={() => setOpen(true)}
-            className="fixed right-94 top-[65vh] z-40 cursor-pointer -translate-y-1/2"
+            className="
+            fixed 
+            left-1/2 -translate-x-1/2 
+            top-[63vh] 
+            md:left-auto md:translate-x-0 
+            md:right-[20vw] md:top-[60vh] 
+            z-40 cursor-pointer
+            "
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.68 }}
-            transition={{ duration: 4.2, ease: [0.52, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, ease: [0.52, 1, 0.36, 1] }}
           >
             <motion.div
               onHoverStart={() => setRotation((r) => r + 120)}
-              className="relative w-44 h-44 rounded-full bg-black flex items-center justify-center"
+              className="relative w-36 h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full bg-black flex items-center justify-center"
             >
               <motion.div
                 className="absolute inset-[-18px] border border-black/80"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 32, repeat: Infinity, ease: "linear" }}
                 style={{
-                  borderRadius:
-                    "52% 48% 56% 44% / 58% 52% 48% 42%",
+                  borderRadius: "52% 48% 56% 44% / 58% 52% 48% 42%",
                 }}
               />
 
@@ -67,8 +73,7 @@ export default function PlayBubble() {
                 animate={{ rotate: -360 }}
                 transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
                 style={{
-                  borderRadius:
-                    "48% 52% 50% 50% / 46% 54% 52% 48%",
+                  borderRadius: "48% 52% 50% 50% / 46% 54% 52% 48%",
                 }}
               />
 
@@ -91,10 +96,10 @@ export default function PlayBubble() {
             </motion.div>
 
             <motion.p
-              className="mt-11 text-center text-sm text-black/90 tracking-wide"
+              className="mt-8 text-center text-sm text-black/90 tracking-wide"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
             >
               Watch my 70s showreel
             </motion.p>
@@ -102,7 +107,6 @@ export default function PlayBubble() {
         )}
       </AnimatePresence>
 
-      {/* VIDEO MODAL */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -111,7 +115,6 @@ export default function PlayBubble() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Animated Background */}
             <motion.div
               className="absolute inset-0 bg-white"
               initial={{ opacity: 0 }}
@@ -120,7 +123,6 @@ export default function PlayBubble() {
               transition={{ duration: 0.6 }}
             />
 
-            {/* Soft gradient overlay for elegance */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-br from-white via-white to-neutral-200"
               initial={{ opacity: 0 }}
@@ -129,41 +131,22 @@ export default function PlayBubble() {
               transition={{ duration: 1 }}
             />
 
-            {/* CLOSE BUTTON */}
             <motion.button
               onClick={() => setOpen(false)}
-              className="absolute top-8 right-8 z-50 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-xl hover:scale-105 transition"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              aria-label="Close video"
+              className="absolute top-8 right-8 z-50 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-xl"
             >
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                stroke="white"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              ✕
             </motion.button>
 
-            {/* VIDEO */}
             <motion.video
               src="/videos/70s.mp4"
               autoPlay
               controls
               className="relative z-40 w-full max-w-5xl max-h-[85vh] rounded-xl shadow-2xl"
-              initial={{ opacity: 0, y: 40, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 40, scale: 0.98 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.6 }}
             />
           </motion.div>
         )}
